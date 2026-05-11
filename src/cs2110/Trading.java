@@ -35,18 +35,28 @@ public class Trading {
         //  this loop should call `argmaxTail()` in each iteration.
 
         /*
+         * Loop variant: `i` is the time block we're currently looking at
+         */
+        int i=0;
+        
+        /*
          * Loop invariant: `optProfit` is the maximum profit that can be achieved when the share is
          * purchased at a time in `[..i)`.
          */
-        // while () {
-        //   assert optimalProfit1Invariant(prices, optProfit, i);
-        //   // The above `assert` statement should appear as the first line in your loop body.
-        //   // You may ignore it if you'd like. It is here so the autograder can verify that
-        //   // you have maintained the invariant. Do not factor this `assert` statement into
-        //   // your runtime complexity analysis.
-        // }
+        int optProfit=0;
+        while (i < prices.length) {
+            assert optimalProfit1Invariant(prices, optProfit, i);
+            // The above `assert` statement should appear as the first line in your loop body.
+            // You may ignore it if you'd like. It is here so the autograder can verify that
+            // you have maintained the invariant. Do not factor this `assert` statement into
+            // your runtime complexity analysis.
+            int buyPrice = prices[i];
+            int sellPrice = argmaxTail(prices, i);
+            optProfit = Math.max(sellPrice-buyPrice,optProfit);
+            i++;
+        }
 
-        throw new UnsupportedOperationException();
+        return optProfit;
     }
 
     /**
