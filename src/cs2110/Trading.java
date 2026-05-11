@@ -11,12 +11,17 @@ public class Trading {
 
     /**
      * Returns an *index* of the maximum value in `prices(i..]`. Requires that `0 <= i <
-     * prices.length-1`.
+     * prices.length-1`, and that every value of `prices[]` is nonnegative.
      */
     static int argmaxTail(int[] prices, int i) {
-        // TODO 2: Implement this method according to its specifications. Use a `while` loop
-        //  documented with the invariant you visualized in part 1.
-        throw new UnsupportedOperationException();
+        if (i<0 || i>=prices.length) {
+            throw new IllegalArgumentException("`i` must be between `0` and `prices.length-1`");
+        }
+        int maxValue = 0;
+        for (int j=i+1; j<prices.length; j++) {
+            maxValue = Math.max(maxValue,prices[j]);
+        }
+        return maxValue;
     }
 
     /**
