@@ -30,10 +30,6 @@ public class Trading {
      * transaction can be made. Requires `prices.length > 1`, and each entry of `prices` is >= 0.
      */
     static int optimalProfit1(int[] prices) {
-        // TODO 3: Implement this method according to its specifications. Uncomment and fill in the
-        //  definition of this `while` loop so that it has the given loop invariant. The body of
-        //  this loop should call `argmaxTail()` in each iteration.
-
         /*
          * Loop variant: `i` is the time block we're currently looking at
          */
@@ -51,7 +47,7 @@ public class Trading {
             // you have maintained the invariant. Do not factor this `assert` statement into
             // your runtime complexity analysis.
             int buyPrice = prices[i];
-            int sellPrice = argmaxTail(prices, i);
+            int sellPrice = prices[argmaxTail(prices, i)];
             optProfit = Math.max(sellPrice-buyPrice,optProfit);
             i++;
         }
