@@ -8,6 +8,11 @@ import static cs2110.LoopInvariants.*;
  * price history in a given time window.
  */
 public class Trading {
+    public static void main(String[] args) {
+        int[] stonks10 = {5,3,8,3,6,4,2,5,7,10};
+        System.out.println(optimalProfit1(stonks10));
+        System.out.println(optimalProfit2(stonks10));
+    }
 
     /**
      * Returns an *index* of the maximum value in `prices(i..]`. Requires that `0 <= i <
@@ -47,7 +52,7 @@ public class Trading {
             // you have maintained the invariant. Do not factor this `assert` statement into
             // your runtime complexity analysis.
             int buyPrice = prices[i];
-            int sellPrice = prices[argmaxTail(prices, i)];
+            int sellPrice = argmaxTail(prices, i);
             optProfit = Math.max(sellPrice-buyPrice,optProfit);
             i++;
         }
@@ -78,8 +83,14 @@ public class Trading {
         //   // you have maintained the invariant. Do not factor this `assert` statement into
         //   // your runtime complexity analysis.
         // }
-
-        throw new UnsupportedOperationException();
+        int highestSellPrice = 0;
+        int maxProfit = 0;
+        for (int i=prices.length-1; i>=0; i--) {
+            maxProfit = Math.max(highestSellPrice-prices[i],maxProfit);
+            highestSellPrice = Math.max(prices[i],highestSellPrice);
+        }
+        return maxProfit;
+        // throw new UnsupportedOperationException();
     }
 
 }
