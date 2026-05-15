@@ -22,11 +22,15 @@ public class Trading {
         if (i<0 || i>=prices.length) {
             throw new IllegalArgumentException("`i` must be between `0` and `prices.length-1`");
         }
-        int maxValue = 0;
+        int maxValue = -1;
+        int maxIndex = -1;
         for (int j=i+1; j<prices.length; j++) {
-            maxValue = Math.max(maxValue,prices[j]);
+            if (prices[j]>maxValue) {
+                maxValue = prices[j];
+                maxIndex = j;
+            }
         }
-        return maxValue;
+        return maxIndex;
     }
 
     /**
@@ -52,7 +56,7 @@ public class Trading {
             // you have maintained the invariant. Do not factor this `assert` statement into
             // your runtime complexity analysis.
             int buyPrice = prices[i];
-            int sellPrice = argmaxTail(prices, i);
+            int sellPrice = prices[argmaxTail(prices, i)];
             optProfit = Math.max(sellPrice-buyPrice,optProfit);
             i++;
         }
