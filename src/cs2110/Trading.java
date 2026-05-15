@@ -12,6 +12,16 @@ public class Trading {
         int[] stonks10 = {5,3,8,3,6,4,2,5,7,10};
         System.out.println(optimalProfit1(stonks10));
         System.out.println(optimalProfit2(stonks10));
+        for (int i=0; i<=10; i++) {
+            int[] xookCoin = new int[i*10000000];
+            for (int j=0; j<i*10000000; j++) {
+                xookCoin[j] = (int)(Math.random()*14341434);
+            }
+            long startTime = System.nanoTime();
+            System.out.println("Optimal profit for xookCoin over "+i*10000000+" days is: "+optimalProfit2(xookCoin));
+            long endTime = System.nanoTime();
+            System.out.println("Time elapsed: "+(endTime-startTime));
+        }
     }
 
     /**
@@ -49,7 +59,7 @@ public class Trading {
          * purchased at a time in `[..i)`.
          */
         int optProfit=0;
-        while (i < prices.length) {
+        while (i < prices.length-1) {
             assert optimalProfit1Invariant(prices, optProfit, i);
             // The above `assert` statement should appear as the first line in your loop body.
             // You may ignore it if you'd like. It is here so the autograder can verify that
