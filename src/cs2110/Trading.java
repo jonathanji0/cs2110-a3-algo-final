@@ -80,31 +80,22 @@ public class Trading {
      * transaction can be made. Requires `prices.length > 1`, and each entry of `prices` is >= 0.
      */
     static int optimalProfit2(int[] prices) {
-        // TODO 5: Implement this method according to its specifications. Uncomment and fill in the
-        //  definition of this `while` loop so that it has the given loop invariant. Augment this
-        //  invariant to account for any additional local variables you modify within the body of
-        //  the loop. Your implementation should have worst-case runtime complexity O(N), where
-        //  N=prices.length, and worst-case space complexity O(1).
-
         /*
          * Loop invariant: `optProfit` is the maximum profit that can be achieved when the share
          * is purchased at a time in `(j..]`.
          */
-        // while () {
-        //   assert optimalProfit2Invariant(prices, optProfit, j);
-        //   // The above `assert` statement should appear as the first line in your loop body.
-        //   // You may ignore it if you'd like. It is here so the autograder can verify that
-        //   // you have maintained the invariant. Do not factor this `assert` statement into
-        //   // your runtime complexity analysis.
-        // }
+
         int highestSellPrice = 0;
-        int maxProfit = 0;
-        for (int i=prices.length-1; i>=0; i--) {
-            maxProfit = Math.max(highestSellPrice-prices[i],maxProfit);
-            highestSellPrice = Math.max(prices[i],highestSellPrice);
+        int optProfit = 0;
+        int j=prices.length-1;
+        while (j >= 0) {
+            assert optimalProfit2Invariant(prices, optProfit, j);
+
+            optProfit = Math.max(highestSellPrice-prices[j],optProfit);
+            highestSellPrice = Math.max(prices[j],highestSellPrice);
+            j--;
         }
-        return maxProfit;
-        // throw new UnsupportedOperationException();
+        return optProfit;
     }
 
 }
